@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ description or site.description }}">
+  <title>{% if title %}{{ title }} | {% endif %}localweb.care</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script>
+    (function () {
+      var stored = localStorage.getItem('lwc-theme');
+      var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="logo">localweb<span class="accent">.care</span></a>
+      <nav class="main-nav" id="mainNav">
+        <ul>
+          <li><a href="/" {% if page.url == "/" %}class="active"{% endif %}>Home</a></li>
+          <li><a href="/about/" {% if page.url == "/about/" %}class="active"{% endif %}>About</a></li>
+          <li><a href="/services/" {% if page.url == "/services/" %}class="active"{% endif %}>Services</a></li>
+          <li><a href="/contact/" {% if page.url == "/contact/" %}class="active"{% endif %}>Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <svg class="icon icon-sun" aria-hidden="true" focusable="false"><use href="/assets/icons.svg#icon-sun"></use></svg>
+          <svg class="icon icon-moon" aria-hidden="true" focusable="false"><use href="/assets/icons.svg#icon-moon"></use></svg>
+        </button>
+        <button class="nav-toggle" id="navToggle" aria-label="Open navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    {{ content | safe }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-logo">localweb<span class="accent">.care</span></span>
+        <ul class="footer-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+        <span class="footer-copy">&copy; {{ site.year }} localweb.care</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>

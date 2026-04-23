@@ -1,0 +1,65 @@
+---
+layout: base.njk
+title: Contact
+description: Get in touch with localweb.care — let's talk about your local web presence.
+---
+
+<div class="page-hero">
+  <div class="container">
+    <h1>Get in Touch</h1>
+    <p>Let's talk about what a stronger web presence could do for your business.</p>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="contact-layout">
+      <div class="contact-info">
+        <h3>Let's start a conversation</h3>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">Whether you're starting from scratch or looking to improve what you have, I'm happy to talk through your options — no pressure, no sales pitch.</p>
+        <div class="contact-detail">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="/assets/icons.svg#icon-mail"></use></svg>
+          <p><a href="mailto:hello@localweb.care">hello@localweb.care</a></p>
+        </div>
+        <div class="contact-detail">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="/assets/icons.svg#icon-clock"></use></svg>
+          <p>I typically respond within one business day.</p>
+        </div>
+        <div class="contact-detail">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="/assets/icons.svg#icon-pin"></use></svg>
+          <p>Serving clients across the US, with a focus on local and regional businesses.</p>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="form-group">
+          <label for="name">Your Name *</label>
+          <input type="text" id="name" name="name" required autocomplete="name" placeholder="Jane Smith">
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" required autocomplete="email" placeholder="jane@yourbusiness.com">
+        </div>
+        <div class="form-group">
+          <label for="service">What are you looking for?</label>
+          <select id="service" name="service">
+            <option value="">— Select a service —</option>
+            <option value="Web Design &amp; Development">Web Design &amp; Development</option>
+            <option value="Local SEO">Local SEO</option>
+            <option value="Google Business Profile">Google Business Profile</option>
+            <option value="Content Strategy">Content Strategy</option>
+            <option value="Website Maintenance">Website Maintenance</option>
+            <option value="Analytics &amp; Reporting">Analytics &amp; Reporting</option>
+            <option value="Not sure yet">Not sure yet</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Tell me about your business *</label>
+          <textarea id="message" name="message" required placeholder="A little about your business, what you're hoping to achieve, and any questions you have…"></textarea>
+        </div>
+        <button type="submit" class="btn btn-solid" style="width:100%;">Send Message</button>
+        <div class="form-status" id="formStatus" role="alert"></div>
+      </form>
+    </div>
+  </div>
+</section>
