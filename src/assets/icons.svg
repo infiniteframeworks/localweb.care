@@ -102,6 +102,14 @@
     <line x1="18.36" y1="5.64"  x2="19.78" y2="4.22"  stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
   </symbol>
 
+  <!-- storefront: local business / brick-and-mortar -->
+  <symbol id="icon-storefront" viewBox="0 0 24 24">
+    <path d="M3 9l1-5h16l1 5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M5 21V12h5v4h4v-4h5v9" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="3" y1="21" x2="21" y2="21" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+  </symbol>
+
   <!-- moon: dark mode -->
   <symbol id="icon-moon" viewBox="0 0 24 24">
     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
