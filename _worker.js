@@ -87,7 +87,7 @@ export default {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: env.FROM_EMAIL ?? 'onboarding@localweb.care',
+        from: env.FROM_EMAIL ?? 'onboarding@contact.localweb.care',
         to: [env.TO_EMAIL ?? 'james.smits@gmail.com'],
         subject: 'New Discovery Questionnaire Submission',
         html: buildEmailHtml(sections),
