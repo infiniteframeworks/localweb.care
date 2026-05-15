@@ -98,7 +98,7 @@ export default {
     if (!res.ok) {
       const err = await res.text();
       console.error('Resend error', res.status, err);
-      return new Response(JSON.stringify({ error: 'Failed to send email' }), {
+      return new Response(JSON.stringify({ error: 'Failed to send email', detail: err, status: res.status }), {
         status: 502,
         headers: { 'Content-Type': 'application/json' }
       });
