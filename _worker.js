@@ -1,189 +1,111 @@
-/**
- * localweb.care — Cloudflare Pages Worker  (_worker.js)
- * ═══════════════════════════════════════════════════════════════════════════
- *
- * HOW THIS FILE WORKS WITH CLOUDFLARE
- * ─────────────────────────────────────
- * When you deploy to Cloudflare Pages, placing _worker.js at the project root
- * enables "Advanced mode" — your own Worker script handles every request to
- * the site instead of the default Pages router.
- *
- *   env.ASSETS  → KV binding Cloudflare creates automatically for your
- *                 static build output (_site/). Call env.ASSETS.fetch(request)
- *                 to serve any built file. If the asset doesn't exist it throws,
- *                 so catch and return a 404.
- *
- *   env.*       → Any bindings (KV, D1, R2, secrets, env vars) you add in the
- *                 Pages dashboard under Settings → Functions → Bindings are
- *                 injected here at runtime.
- *
- * DEPLOYMENT CHECKLIST
- * ─────────────────────
- *  1. Connect your GitHub repo to a Cloudflare Pages project.
- *  2. In Build settings:
- *       Build command:       npm run build
- *       Build output dir:    _site
- *  3. This file lives at the repo root — Cloudflare detects it automatically.
- *     No wrangler.toml is required for basic Pages deployments.
- *  4. Add the CONTACT_EMAIL secret in Pages → Settings → Environment Variables
- *     (mark it as "Secret" so it's encrypted at rest).
- *
- * CONTACT FORM EMAIL
- * ───────────────────
- * The /contact/submit handler below uses MailChannels, which is free for
- * Workers running on Cloudflare's network — no API key or account needed.
- * Reference: https://blog.cloudflare.com/sending-email-from-workers-with-mailchannels/
- *
- * Alternatives if MailChannels doesn't suit you:
- *   • Resend / SendGrid / Postmark → replace the fetch() call with their API
- *   • Cloudflare Email Workers → add an `email` binding in the Pages dashboard
- *   • Forward to a third-party form service (Formspree, etc.) from the client
- *
- * LOCAL DEVELOPMENT
- * ──────────────────
- * Cloudflare's Vite plugin or `wrangler pages dev` can emulate Pages Workers
- * locally, but for this Eleventy project the simplest dev flow is:
- *   1. npm start          → runs Eleventy's dev server (no Worker emulation)
- *   2. Test Worker logic by deploying a preview branch to Pages.
- *
- * ═══════════════════════════════════════════════════════════════════════════
- */
+function buildEmailHtml(sections) {
+  const rows = sections.map(section => {
+    const qs = section.questions.map(q => {
+      const answer = (q.answer || '').trim() || '<em style="color:#999">No response</em>';
+      return `
+        <tr>
+          <td style="padding:8px 12px;color:#555;font-size:13px;vertical-align:top;width:40%;border-bottom:1px solid #f0f0f0">${q.text}</td>
+          <td style="padding:8px 12px;font-size:14px;vertical-align:top;border-bottom:1px solid #f0f0f0;white-space:pre-wrap">${answer}</td>
+        </tr>`;
+    }).join('');
+    return `
+      <tr><td colspan="2" style="padding:20px 12px 6px;font-weight:600;font-size:15px;color:#111;border-top:2px solid #e5e5e5">${section.title}</td></tr>
+      ${qs}`;
+  }).join('');
+
+  return `<!DOCTYPE html>
+<html>
+<body style="margin:0;padding:24px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f9f9f9">
+  <div style="max-width:700px;margin:0 auto;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.08)">
+    <div style="background:#111;padding:24px 32px">
+      <p style="margin:0;color:#fff;font-size:20px;font-weight:600">New Onboarding Questionnaire</p>
+      <p style="margin:6px 0 0;color:#aaa;font-size:13px">Submitted via localweb.care</p>
+    </div>
+    <table style="width:100%;border-collapse:collapse">
+      ${rows}
+    </table>
+    <div style="padding:20px 32px;color:#999;font-size:12px;border-top:1px solid #eee">
+      Submitted ${new Date().toUTCString()}
+    </div>
+  </div>
+</body>
+</html>`;
+}
+
+function buildEmailText(sections) {
+  return sections.map(section => {
+    const qs = section.questions.map(q => {
+      const answer = (q.answer || '').trim() || '(no response)';
+      return `  ${q.text}\n  ${answer}`;
+    }).join('\n\n');
+    return `=== ${section.title} ===\n\n${qs}`;
+  }).join('\n\n');
+}
 
 export default {
-  /**
-   * @param {Request}          request
-   * @param {object}           env  — Cloudflare bindings (ASSETS, secrets, KV…)
-   * @param {ExecutionContext}  ctx  — ctx.waitUntil() / ctx.passThroughOnException()
-   * @returns {Promise<Response>}
-   */
-  async fetch(request, env, ctx) {
-    const url = new URL(request.url);
-
-    // ── CORS pre-flight ────────────────────────────────────────────────────
+  async fetch(request, env) {
     if (request.method === 'OPTIONS') {
-      return new Response(null, { status: 204, headers: corsHeaders() });
-    }
-
-    // ── Contact form endpoint ──────────────────────────────────────────────
-    if (url.pathname === '/contact/submit' && request.method === 'POST') {
-      return handleContactForm(request, env);
-    }
-
-    // ── Static assets (Eleventy build output) ─────────────────────────────
-    // env.ASSETS is automatically bound to the contents of your _site/ folder.
-    try {
-      return await env.ASSETS.fetch(request);
-    } catch {
-      return new Response('Not found', {
-        status: 404,
-        headers: { 'Content-Type': 'text/plain' },
+      return new Response(null, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type',
+        }
       });
     }
-  },
-};
 
-/* ── Contact form handler ─────────────────────────────────────────────────── */
+    const url = new URL(request.url);
+    if (url.pathname !== '/submit') {
+      return env.ASSETS.fetch(request);
+    }
+    if (request.method !== 'POST') {
+      return new Response('Method not allowed', { status: 405 });
+    }
 
-async function handleContactForm(request, env) {
-  // Parse JSON body
-  let body;
-  try {
-    body = await request.json();
-  } catch {
-    return jsonResponse({ error: 'Invalid request body' }, 400);
-  }
+    let body;
+    try {
+      body = await request.json();
+    } catch {
+      return new Response(JSON.stringify({ error: 'Invalid JSON' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
 
-  const { name, email, service, message } = body ?? {};
+    const { sections } = body;
+    if (!Array.isArray(sections) || sections.length === 0) {
+      return new Response(JSON.stringify({ error: 'Missing sections' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
 
-  // Basic validation
-  if (!name?.trim() || !email?.trim() || !message?.trim()) {
-    return jsonResponse({ error: 'name, email, and message are required' }, 400);
-  }
-  if (!isValidEmail(email)) {
-    return jsonResponse({ error: 'Invalid email address' }, 400);
-  }
-
-  const toAddress = env.CONTACT_EMAIL ?? 'hello@localweb.care';
-
-  // ── Send via MailChannels ────────────────────────────────────────────────
-  // MailChannels is free for Cloudflare Workers — no account or API key needed.
-  // To switch providers, replace this fetch() with your provider's REST call.
-  const mailPayload = {
-    personalizations: [{ to: [{ email: toAddress, name: 'localweb.care' }] }],
-    from: { email: 'noreply@localweb.care', name: 'localweb.care Contact Form' },
-    reply_to: { email, name },
-    subject: `New enquiry from ${name}${service ? ` · ${service}` : ''}`,
-    content: [
-      {
-        type: 'text/plain',
-        value: [
-          `Name:    ${name}`,
-          `Email:   ${email}`,
-          `Service: ${service || 'Not specified'}`,
-          '',
-          message,
-        ].join('\n'),
-      },
-      {
-        type: 'text/html',
-        value: `
-          <p><strong>Name:</strong> ${esc(name)}</p>
-          <p><strong>Email:</strong> <a href="mailto:${esc(email)}">${esc(email)}</a></p>
-          <p><strong>Service:</strong> ${esc(service || 'Not specified')}</p>
-          <hr>
-          <p style="white-space:pre-wrap">${esc(message)}</p>
-        `.trim(),
-      },
-    ],
-  };
-
-  try {
-    const mailRes = await fetch('https://api.mailchannels.net/tx/v1/send', {
+    const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(mailPayload),
+      headers: {
+        'Authorization': `Bearer ${env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: env.FROM_EMAIL ?? 'onboarding@localweb.care',
+        to: [env.TO_EMAIL ?? 'james.smits@gmail.com'],
+        subject: 'New Discovery Questionnaire Submission',
+        html: buildEmailHtml(sections),
+        text: buildEmailText(sections),
+      }),
     });
 
-    // MailChannels returns 202 on success
-    if (mailRes.status !== 202 && !mailRes.ok) {
-      const detail = await mailRes.text().catch(() => '');
-      console.error('MailChannels error', mailRes.status, detail);
-      return jsonResponse({ error: 'Failed to send message' }, 500);
+    if (!res.ok) {
+      const err = await res.text();
+      console.error('Resend error', res.status, err);
+      return new Response(JSON.stringify({ error: 'Failed to send email' }), {
+        status: 502,
+        headers: { 'Content-Type': 'application/json' }
+      });
     }
-  } catch (err) {
-    console.error('Network error sending email:', err);
-    return jsonResponse({ error: 'Failed to send message' }, 500);
+
+    return new Response(JSON.stringify({ ok: true }), {
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
-
-  return jsonResponse({ ok: true });
-}
-
-/* ── Helpers ─────────────────────────────────────────────────────────────── */
-
-function jsonResponse(data, status = 200) {
-  return new Response(JSON.stringify(data), {
-    status,
-    headers: { 'Content-Type': 'application/json', ...corsHeaders() },
-  });
-}
-
-function corsHeaders() {
-  return {
-    'Access-Control-Allow-Origin':  '*',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
-  };
-}
-
-function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-/** Minimal HTML escaping to prevent XSS in the HTML email body */
-function esc(str = '') {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-}
+};

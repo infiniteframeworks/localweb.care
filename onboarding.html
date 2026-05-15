@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website Discovery Questionnaire | localweb.care</title>
+  <meta name="description" content="Tell us about your business, your goals, and your website needs. Fill out this discovery questionnaire and we'll come to our first conversation fully prepared." />
+  <link rel="canonical" href="https://localweb.care/onboarding.html" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- Fixed header with progress bar -->
+<header>
+<a href="index.html" class="logo">localweb.care</a>
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill" style="width: 12.5%"></div>
+  </div>
+  <span class="step-label" id="step-label">1 of 8</span>
+</header>
+
+<!-- Slide viewport -->
+<div class="viewport" id="viewport">
+  <div class="slides-track" id="slides-track">
+
+    <!-- Section 1: About Your Business -->
+    <div class="slide" data-section="0">
+      <div class="slide-inner">
+        <div class="section-eyebrow">Section 1 of 8</div>
+        <h1 class="section-title">About Your Business</h1>
+        <div class="question">
+          <label><span class="q-number">1</span> What does your business do, in one or two sentences?</label>
+          <textarea id="q1" placeholder="We help…" rows="3"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">2</span> How long have you been operating, and how many people are on the team?</label>
+          <textarea id="q2" placeholder="We've been running for… and have…" rows="2"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">3</span> Who are your customers? Briefly describe your typical buyer.</label>
+          <textarea id="q3" placeholder="Our typical customer is…" rows="3"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">4</span> Who are your top 2–3 competitors, and what do they do well online?</label>
+          <textarea id="q4" placeholder="Our main competitors are…" rows="3"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">5</span> What makes your business different from those competitors?</label>
+          <textarea id="q5" placeholder="What sets us apart is…" rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: The Real Problem -->
+    <div class="slide" data-section="1">
+      <div class="slide-inner">
+        <div class="section-eyebrow">Section 2 of 8</div>
+        <h1 class="section-title">The Real Problem</h1>
+        <div class="question">
+          <label><span class="q-number">6</span> What prompted you to look into a new or improved website right now?</label>
+          <textarea id="q6" placeholder="We decided to do this because…" rows="3"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">7</span> If you have a current site, what's working and what isn't?</label>
+          <textarea id="q7" placeholder="What works: … What doesn't: …" rows="4"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">8</span> What would success look like 6–12 months after launch?</label>
+          <textarea id="q8" placeholder="We'd consider it a success if…" rows="3"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">9</span> If we did nothing, what would happen to your business?</label>
+          <textarea id="q9" placeholder="Without this, we'd…" rows="2"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">10</span> Have you tried to solve this before? What happened?</label>
+          <textarea id="q10" placeholder="We tried… and it…" rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Customers and Goals -->
+    <div class="slide" data-section="2">
+      <div class="slide-inner">
+        <div class="section-eyebrow">Section 3 of 8</div>
+        <h1 class="section-title">Customers &amp; Goals</h1>
+        <div class="question">
+          <label><span class="q-number">11</span> What's the single most important action you want a visitor to take?</label>
+          <textarea id="q11" placeholder="The #1 thing we want visitors to do is…" rows="2"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">12</span> What questions do customers ask you over and over that a website could answer?</label>
+          <textarea id="q12" placeholder="People always ask us…" rows="4"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">13</span> Where do your customers currently find you?</label>
+          <textarea id="q13" placeholder="Mostly through Google / referrals / social / walk-ins…" rows="2"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">14</span> Do you sell online, take bookings, generate leads, or something else? Describe the flow.</label>
+          <textarea id="q14" placeholder="A customer finds us, then…" rows="4"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 4: Content and Brand -->
+    <div class="slide" data-section="3">
+      <div class="slide-inner">
+        <div class="section-eyebrow">Section 4 of 8</div>
+        <h1 class="section-title">Content &amp; Brand</h1>
+        <div class="question">
+          <label><span class="q-number">16</span> Do you have a logo, brand colors, or style guide? Are you happy with them?</label>
+          <textarea id="q16" placeholder="We have… and we feel…" rows="3"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">17</span> Do you have written content, photos, and videos ready, or will you need help?</label>
+          <textarea id="q17" placeholder="We have ready… We'll need help with…" rows="3"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">18</span> Are there 2–3 websites whose look and feel you admire? Why?</label>
+          <textarea id="q18" placeholder="We love [site] because…" rows="4"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">19</span> Are there sites you actively dislike? Why?</label>
+          <textarea id="q19" placeholder="We hate when sites…" rows="3"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">20</span> Whose voice will the site speak in — formal, casual, expert, friendly?</label>
+          <textarea id="q20" placeholder="We want the tone to feel…" rows="2"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 5: Functionality -->
+    <div class="slide" data-section="4">
+      <div class="slide-inner">
+        <div class="section-eyebrow">Section 5 of 8</div>
+        <h1 class="section-title">Functionality</h1>
+        <div class="question">
+          <label><span class="q-number">21</span> List every feature you think you need (contact form, blog, store, booking, etc.).</label>
+          <textarea id="q21" placeholder="We need…" rows="4"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">22</span> Which of those are must-haves versus nice-to-haves?</label>
+          <textarea id="q22" placeholder="Must-have: … Nice-to-have: …" rows="4"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">23</span> Are there existing tools you need to connect to (CRM, email, accounting, scheduling)?</label>
+          <textarea id="q23" placeholder="We currently use…" rows="3"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">24</span> Will anyone on your team update the site themselves? Who, and how comfortable are they with tech?</label>
+          <textarea id="q24" placeholder="[Name] would handle updates — they're comfortable with…" rows="3"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">25</span> Do you need it in multiple languages, or accessible to specific audiences?</label>
+          <textarea id="q25" placeholder="We need… / Not applicable" rows="2"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 6: Practical Stuff -->
+    <div class="slide" data-section="5">
+      <div class="slide-inner">
+        <div class="section-eyebrow">Section 6 of 8</div>
+        <h1 class="section-title">Practical Stuff</h1>
+        <div class="question">
+          <label><span class="q-number">26</span> Do you own your current domain name and hosting? Do you have logins?</label>
+          <textarea id="q26" placeholder="Domain is registered at… Hosting is at…" rows="3"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">27</span> Who currently maintains your website, if anyone?</label>
+          <textarea id="q27" placeholder="Currently maintained by…" rows="2"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">28</span> What's your ideal launch date, and is anything tied to that date?</label>
+          <textarea id="q28" placeholder="Ideally we'd launch by… because…" rows="3"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">29</span> What's your budget range for this project?</label>
+          <textarea id="q29" placeholder="We're thinking in the range of…" rows="2"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">30</span> What's your budget for ongoing maintenance, hosting, and updates after launch?</label>
+          <textarea id="q30" placeholder="For ongoing work, we'd budget…" rows="2"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 7: Decision Making -->
+    <div class="slide" data-section="6">
+      <div class="slide-inner">
+        <div class="section-eyebrow">Section 7 of 8</div>
+        <h1 class="section-title">Decision Making</h1>
+        <div class="question">
+          <label><span class="q-number">31</span> Who needs to approve decisions on this project?</label>
+          <textarea id="q31" placeholder="Final decisions go through…" rows="2"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">32</span> Who will be my main point of contact week-to-week?</label>
+          <input type="text" id="q32" placeholder="Name and role" />
+        </div>
+        <div class="question">
+          <label><span class="q-number">33</span> How much time per week can you realistically spend on this project?</label>
+          <textarea id="q33" placeholder="We can dedicate about… hours per week" rows="2"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">34</span> What's your preferred way to communicate — email, calls, something else?</label>
+          <input type="text" id="q34" placeholder="Email / Slack / Phone / etc." />
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 8: Anything Else -->
+    <div class="slide" data-section="7">
+      <div class="slide-inner">
+        <div class="section-eyebrow">Section 8 of 8</div>
+        <h1 class="section-title">Anything Else</h1>
+        <div class="question">
+          <label><span class="q-number">35</span> What's your biggest worry about doing this project?</label>
+          <textarea id="q35" placeholder="My biggest concern is…" rows="3"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">36</span> What would make you say "this was money well spent" a year from now?</label>
+          <textarea id="q36" placeholder="A year from now, I'd be thrilled if…" rows="3"></textarea>
+        </div>
+        <div class="question">
+          <label><span class="q-number">37</span> Is there anything I haven't asked that you want me to know?</label>
+          <textarea id="q37" placeholder="One more thing…" rows="4"></textarea>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /slides-track -->
+
+  <!-- Confirmation screen (hidden until submit) -->
+  <div id="confirm-screen">
+    <div class="check-icon">✓</div>
+    <h2>Thanks — that's everything.</h2>
+    <p>Your responses have been saved. I'll review them before our next conversation and come prepared with a clear plan.</p>
+    <button class="summary-link" onclick="openModal()">View your full summary →</button>
+  </div>
+</div><!-- /viewport -->
+
+<!-- Bottom navigation bar -->
+<nav class="nav-bar" id="nav-bar">
+  <button class="btn btn-ghost" id="btn-back" onclick="navigate(-1)" disabled>
+    ← Back
+  </button>
+  <div class="section-dots" id="dots"></div>
+  <button class="btn btn-primary" id="btn-next" onclick="navigate(1)">
+    Next →
+  </button>
+</nav>
+
+<!-- Summary modal -->
+<div class="modal-backdrop" id="modal-backdrop" onclick="closeModalOnBackdrop(event)">
+  <div class="modal">
+    <h3>Your Responses</h3>
+    <div id="modal-body"></div>
+    <button class="modal-close" onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<script>
+  const SECTIONS = [
+    {
+      title: "About Your Business",
+      questions: [
+        { id: "q1",  text: "What does your business do?" },
+        { id: "q2",  text: "How long operating / team size?" },
+        { id: "q3",  text: "Who are your customers?" },
+        { id: "q4",  text: "Top 2–3 competitors and what they do well?" },
+        { id: "q5",  text: "What makes you different?" },
+      ]
+    },
+    {
+      title: "The Real Problem",
+      questions: [
+        { id: "q6",  text: "What prompted you to look into this now?" },
+        { id: "q7",  text: "Current site: what works, what doesn't?" },
+        { id: "q8",  text: "What does success look like in 6–12 months?" },
+        { id: "q9",  text: "If you did nothing, what happens?" },
+        { id: "q10", text: "Have you tried to solve this before?" },
+      ]
+    },
+    {
+      title: "Customers & Goals",
+      questions: [
+        { id: "q11", text: "Most important action for a visitor?" },
+        { id: "q12", text: "Questions customers ask repeatedly?" },
+        { id: "q13", text: "Where do customers find you now?" },
+        { id: "q14", text: "How do you generate business (flow)?" },
+      ]
+    },
+    {
+      title: "Content & Brand",
+      questions: [
+        { id: "q16", text: "Logo / brand colors / style guide?" },
+        { id: "q17", text: "Content, photos, and videos ready?" },
+        { id: "q18", text: "Sites you admire and why?" },
+        { id: "q19", text: "Sites you dislike and why?" },
+        { id: "q20", text: "Tone of voice for the site?" },
+      ]
+    },
+    {
+      title: "Functionality",
+      questions: [
+        { id: "q21", text: "Every feature you think you need?" },
+        { id: "q22", text: "Must-haves vs. nice-to-haves?" },
+        { id: "q23", text: "Existing tools to integrate?" },
+        { id: "q24", text: "Who will update the site?" },
+        { id: "q25", text: "Multiple languages or special accessibility?" },
+      ]
+    },
+    {
+      title: "Practical Stuff",
+      questions: [
+        { id: "q26", text: "Domain and hosting ownership / logins?" },
+        { id: "q27", text: "Who maintains the site now?" },
+        { id: "q28", text: "Ideal launch date and any hard constraints?" },
+        { id: "q29", text: "Budget range for the project?" },
+        { id: "q30", text: "Ongoing maintenance budget?" },
+      ]
+    },
+    {
+      title: "Decision Making",
+      questions: [
+        { id: "q31", text: "Who approves decisions?" },
+        { id: "q32", text: "Main point of contact?" },
+        { id: "q33", text: "Time available per week?" },
+        { id: "q34", text: "Preferred communication method?" },
+      ]
+    },
+    {
+      title: "Anything Else",
+      questions: [
+        { id: "q35", text: "Biggest worry about this project?" },
+        { id: "q36", text: "What would make it money well spent?" },
+        { id: "q37", text: "Anything else to share?" },
+      ]
+    },
+  ];
+
+  let current = 0;
+  const total = SECTIONS.length;
+
+  const track    = document.getElementById('slides-track');
+  const fill     = document.getElementById('progress-fill');
+  const label    = document.getElementById('step-label');
+  const btnBack  = document.getElementById('btn-back');
+  const btnNext  = document.getElementById('btn-next');
+  const dotsEl   = document.getElementById('dots');
+  const navBar   = document.getElementById('nav-bar');
+  const viewport = document.getElementById('viewport');
+  const confirm  = document.getElementById('confirm-screen');
+
+  // Build dots
+  for (let i = 0; i < total; i++) {
+    const d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Go to section ' + (i + 1));
+    d.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(d);
+  }
+
+  function updateUI() {
+    // Slide the track
+    track.style.transform = `translateX(-${current * 100}vw)`;
+
+    // Progress
+    const pct = ((current + 1) / total) * 100;
+    fill.style.width = pct + '%';
+    label.textContent = `${current + 1} of ${total}`;
+
+    // Buttons
+    btnBack.disabled = current === 0;
+    if (current === total - 1) {
+      btnNext.textContent = 'Submit';
+      btnNext.className = 'btn btn-submit';
+    } else {
+      btnNext.textContent = 'Next →';
+      btnNext.className = 'btn btn-primary';
+    }
+
+    // Dots
+    const dots = dotsEl.querySelectorAll('.dot');
+    dots.forEach((d, i) => {
+      d.className = 'dot' + (i === current ? ' active' : i < current ? ' visited' : '');
+    });
+  }
+
+  function goTo(index) {
+    if (index < 0 || index >= total) return;
+    current = index;
+    updateUI();
+    // Scroll slide back to top
+    window.scrollTo({ top: 0 });
+  }
+
+  function navigate(dir) {
+    if (dir === 1 && current === total - 1) {
+      submitForm();
+      return;
+    }
+    goTo(current + dir);
+  }
+
+  async function submitForm() {
+    btnNext.disabled = true;
+    btnNext.textContent = 'Sending…';
+
+    const sections = SECTIONS.map(section => ({
+      title: section.title,
+      questions: section.questions.map(q => ({
+        text: q.text,
+        answer: (document.getElementById(q.id)?.value ?? '').trim(),
+      })),
+    }));
+
+    try {
+      const res = await fetch('/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sections }),
+      });
+      if (!res.ok) throw new Error('server error');
+    } catch {
+      btnNext.disabled = false;
+      btnNext.textContent = 'Submit';
+      alert('Something went wrong — please try again.');
+      return;
+    }
+
+    track.style.display = 'none';
+    navBar.style.display = 'none';
+    confirm.classList.add('visible');
+    fill.style.width = '100%';
+    label.textContent = 'Complete';
+  }
+
+  function buildModal() {
+    const body = document.getElementById('modal-body');
+    body.innerHTML = '';
+    SECTIONS.forEach(section => {
+      const sec = document.createElement('div');
+      sec.className = 'summary-section';
+      sec.innerHTML = `<h4>${section.title}</h4>`;
+      section.questions.forEach(q => {
+        const el = document.getElementById(q.id);
+        const val = el ? el.value.trim() : '';
+        const item = document.createElement('div');
+        item.className = 'summary-item';
+        item.innerHTML = `
+          <div class="sq">${q.text}</div>
+          <div class="sa">${val || '<em style="color:var(--muted)">No response</em>'}</div>
+        `;
+        sec.appendChild(item);
+      });
+      body.appendChild(sec);
+    });
+  }
+
+  function openModal() {
+    buildModal();
+    document.getElementById('modal-backdrop').classList.add('open');
+  }
+
+  function closeModal() {
+    document.getElementById('modal-backdrop').classList.remove('open');
+  }
+
+  function closeModalOnBackdrop(e) {
+    if (e.target === document.getElementById('modal-backdrop')) closeModal();
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return;
+    if (e.key === 'ArrowRight') navigate(1);
+    if (e.key === 'ArrowLeft')  navigate(-1);
+  });
+
+  // Initialize
+  updateUI();
+</script>
+</body>
+</html>
