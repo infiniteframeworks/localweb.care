@@ -42,6 +42,34 @@ function buildEmailText(sections) {
   }).join('\n\n');
 }
 
+async function sendViaResend(env, payload) {
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${env.RESEND_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      from: env.FROM_EMAIL ?? 'onboarding@contact.localweb.care',
+      to: [env.TO_EMAIL ?? 'james.smits@gmail.com'],
+      ...payload,
+    }),
+  });
+
+  if (!res.ok) {
+    const err = await res.text();
+    console.error('Resend error', res.status, err);
+    return new Response(JSON.stringify({ error: 'Failed to send email', detail: err, status: res.status }), {
+      status: 502,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+
+  return new Response(JSON.stringify({ ok: true }), {
+    headers: { 'Content-Type': 'application/json' }
+  });
+}
+
 export default {
   async fetch(request, env) {
     if (request.method === 'OPTIONS') {
@@ -55,6 +83,41 @@ export default {
     }
 
     const url = new URL(request.url);
+
+    if (url.pathname === '/contact') {
+      if (request.method !== 'POST') return new Response('Method not allowed', { status: 405 });
+
+      let body;
+      try { body = await request.json(); } catch {
+        return new Response(JSON.stringify({ error: 'Invalid JSON' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+      }
+
+      const { name, email, business, phone, message } = body;
+      if (!name || !email || !message) {
+        return new Response(JSON.stringify({ error: 'Missing required fields' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+      }
+
+      const text = [
+        `From: ${name}${business ? ` — ${business}` : ''}`,
+        `Email: ${email}`,
+        phone ? `Phone: ${phone}` : null,
+        '',
+        message,
+      ].filter(l => l !== null).join('\n');
+
+      const html = `<p><strong>From:</strong> ${name}${business ? ` — ${business}` : ''}<br>
+<strong>Email:</strong> <a href="mailto:${email}">${email}</a>${phone ? `<br><strong>Phone:</strong> ${phone}` : ''}</p>
+<hr>
+<p style="white-space:pre-wrap">${message}</p>`;
+
+      return sendViaResend(env, {
+        subject: `New contact from ${name}`,
+        reply_to: email,
+        text,
+        html,
+      });
+    }
+
     if (url.pathname !== '/submit') {
       return env.ASSETS.fetch(request);
     }
@@ -80,32 +143,10 @@ export default {
       });
     }
 
-    const res = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${env.RESEND_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: env.FROM_EMAIL ?? 'onboarding@contact.localweb.care',
-        to: [env.TO_EMAIL ?? 'james.smits@gmail.com'],
-        subject: 'New Discovery Questionnaire Submission',
-        html: buildEmailHtml(sections),
-        text: buildEmailText(sections),
-      }),
-    });
-
-    if (!res.ok) {
-      const err = await res.text();
-      console.error('Resend error', res.status, err);
-      return new Response(JSON.stringify({ error: 'Failed to send email', detail: err, status: res.status }), {
-        status: 502,
-        headers: { 'Content-Type': 'application/json' }
-      });
-    }
-
-    return new Response(JSON.stringify({ ok: true }), {
-      headers: { 'Content-Type': 'application/json' }
+    return sendViaResend(env, {
+      subject: 'New Discovery Questionnaire Submission',
+      html: buildEmailHtml(sections),
+      text: buildEmailText(sections),
     });
   }
 };

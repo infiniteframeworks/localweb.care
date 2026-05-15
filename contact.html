@@ -283,17 +283,34 @@
 </main>
 
 <script>
-  document.getElementById('contact-form').addEventListener('submit', function(e) {
+  document.getElementById('contact-form').addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    const name    = document.getElementById('name').value.trim();
-    const email   = document.getElementById('email').value.trim();
-    const message = document.getElementById('message').value.trim();
+    const name     = document.getElementById('name').value.trim();
+    const email    = document.getElementById('email').value.trim();
+    const business = document.getElementById('business').value.trim();
+    const phone    = document.getElementById('phone').value.trim();
+    const message  = document.getElementById('message').value.trim();
 
     if (!name || !email || !message) return;
 
-    // Replace with your actual form submission (API call, Netlify Forms, etc.)
-    console.log('Contact form submission:', { name, email, message });
+    const btn = this.querySelector('[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    try {
+      const res = await fetch('/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, business, phone, message }),
+      });
+      if (!res.ok) throw new Error('server error');
+    } catch {
+      btn.disabled = false;
+      btn.textContent = 'Send it over →';
+      alert('Something went wrong — please try again.');
+      return;
+    }
 
     this.style.display = 'none';
     document.getElementById('success-banner').classList.add('visible');
