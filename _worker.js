@@ -84,8 +84,7 @@ export default {
 
     const url = new URL(request.url);
 
-    if (url.pathname === '/contact') {
-      if (request.method !== 'POST') return new Response('Method not allowed', { status: 405 });
+    if (url.pathname === '/contact' && request.method === 'POST') {
 
       let body;
       try { body = await request.json(); } catch {
