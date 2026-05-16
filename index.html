@@ -1,18 +1,22 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Local Website Design for Small Businesses | localweb.care</title>
-  <meta name="description" content="Handcrafted websites for local businesses — built by a real person, not an agency. Honest pricing, thoughtful design, and someone who actually picks up the phone." />
+  <meta name="description"
+    content="Handcrafted websites for local businesses — built by a real person, not an agency. Honest pricing, thoughtful design, and someone who actually picks up the phone." />
   <link rel="canonical" href="https://localweb.care/" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://localweb.care/" />
   <meta property="og:title" content="Local Website Design for Small Businesses | localweb.care" />
-  <meta property="og:description" content="Handcrafted websites for local businesses — built by a real person, not an agency. Honest pricing, thoughtful design, and someone who actually picks up the phone." />
+  <meta property="og:description"
+    content="Handcrafted websites for local businesses — built by a real person, not an agency. Honest pricing, thoughtful design, and someone who actually picks up the phone." />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Local Website Design for Small Businesses | localweb.care" />
-  <meta name="twitter:description" content="Handcrafted websites for local businesses — built by a real person, not an agency. Honest pricing, thoughtful design, and someone who actually picks up the phone." />
+  <meta name="twitter:description"
+    content="Handcrafted websites for local businesses — built by a real person, not an agency. Honest pricing, thoughtful design, and someone who actually picks up the phone." />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -43,6 +47,7 @@
       font-weight: 700;
       letter-spacing: -0.02em;
       line-height: 1;
+      position: relative;
     }
 
     .hero-wordmark .local {
@@ -54,15 +59,16 @@
     }
 
     .hero-wordmark .porch-dot {
-      display: inline-block;
-      width: 0.14em;
-      height: 0.14em;
+      position: absolute;
+      width: 3em;
+      height: 3em;
       background: var(--porch-light);
       border-radius: 50%;
-      margin: 0 0.01em;
-      vertical-align: super;
-      position: relative;
-      top: 0.05em;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      opacity: 0.25;
     }
 
     .tagline {
@@ -73,14 +79,19 @@
     }
   </style>
 </head>
+
 <body>
+  <header>
+    <a href="index.html" class="logo">localweb.care</a>
+  </header>
   <h1 class="hero-wordmark">
-    <span class="local">local</span><span class="webcare">web<span class="porch-dot"></span>care</span>
+    <span class="local">local</span><span class="webcare">web.<span class="porch-dot"></span>care</span>
   </h1>
   <p class="tagline">local websites done right</p>
   <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
-    <a href="contact.html" class="btn btn-submit">Let's chat</a>
-    <a href="onboarding.html" class="btn btn-ghost">Tell me more</a>
+    <a href="contact/" class="btn btn-submit">Let's chat</a>
+    <a href="about/" class="btn btn-ghost">Tell me more</a>
   </div>
 </body>
+
 </html>

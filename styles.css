@@ -78,21 +78,21 @@ header {
   letter-spacing: -0.01em;
   white-space: nowrap;
   flex-shrink: 0;
+  position: relative;
 }
 
-/* The porch-light dot sits behind the period — echoes the brand mark */
 .logo::after {
   content: '';
-  display: inline-block;
-  width: 7px;
-  height: 7px;
+  position: absolute;
+  width: 3em;
+  height: 3em;
   background: var(--porch-light);
   border-radius: 50%;
-  margin-left: -5px;
-  vertical-align: super;
-  font-size: 0.5em;
-  position: relative;
-  top: -2px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  opacity: 0.25;
 }
 
 .progress-track {
@@ -144,6 +144,32 @@ header {
 .slide-inner {
   width: 100%;
   max-width: 680px;
+}
+
+.welcome-intro p {
+  margin-bottom: 20px;
+}
+
+.welcome-list {
+  list-style: none;
+  margin: 4px 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.welcome-list li {
+  padding-left: 26px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.welcome-list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--terracotta);
+  font-weight: 600;
 }
 
 .section-eyebrow {

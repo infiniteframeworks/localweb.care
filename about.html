@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Jim Smits | localweb.care</title>
+  <meta name="description"
+    content="Jim Smits spent years as a software development manager and director of ecommerce. Now he helps small businesses level up their web presence." />
+  <link rel="canonical" href="https://localweb.care/about/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://localweb.care/about/" />
+  <meta property="og:title" content="About Jim Smits | localweb.care" />
+  <meta property="og:description"
+    content="Jim Smits spent years as a software development manager and director of ecommerce. Now he helps small businesses level up their web presence." />
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    body {
+      display: block;
+      padding: 0;
+      text-align: left;
+    }
+
+    header {
+      justify-content: flex-start;
+    }
+
+    main {
+      padding-top: 61px;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 80px 24px 56px;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 6vw, 60px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--stoop-navy);
+      margin-bottom: 24px;
+    }
+
+    .hero-sub {
+      font-size: 19px;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.65;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .divider hr {
+      border: none;
+      border-top: 1px solid var(--chalk);
+    }
+
+    /* ── Story section ── */
+    .story {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 56px 24px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .story-label {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 14px;
+    }
+
+    .story h2 {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--stoop-navy);
+      margin-bottom: 24px;
+    }
+
+    .story p {
+      color: var(--sidewalk);
+      font-size: 17px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .story p:last-child {
+      margin-bottom: 0;
+    }
+
+    .story-note {
+      font-family: var(--font-accent);
+      font-size: 22px;
+      color: var(--terracotta);
+      line-height: 1.4;
+      padding: 24px;
+      background: var(--paper);
+      border-left: 3px solid var(--porch-light);
+      border-radius: 0 var(--radius-card) var(--radius-card) 0;
+      margin: 8px 0;
+    }
+
+    /* ── Services ── */
+    .services {
+      background: var(--stoop-navy);
+      padding: 72px 24px;
+    }
+
+    .services-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .services-label {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--porch-light);
+      margin-bottom: 14px;
+    }
+
+    .services h2 {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--fresh-bread);
+      margin-bottom: 48px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .service-card {
+      background: rgba(255, 252, 245, 0.06);
+      border: 1px solid rgba(255, 252, 245, 0.12);
+      border-radius: var(--radius-card);
+      padding: 24px;
+    }
+
+    .service-card .icon {
+      font-size: 26px;
+      margin-bottom: 14px;
+      line-height: 1;
+    }
+
+    .service-card h3 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--fresh-bread);
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .service-card p {
+      font-size: 15px;
+      color: rgba(250, 243, 227, 0.65);
+      line-height: 1.55;
+    }
+
+    /* ── CTA ── */
+    .cta {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 80px 24px;
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 5vw, 48px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--stoop-navy);
+      margin-bottom: 16px;
+    }
+
+    .cta p {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 480px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 540px) {
+      .hero {
+        padding: 60px 20px 40px;
+      }
+
+      .story {
+        padding: 40px 20px;
+      }
+
+      .cta {
+        padding: 60px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a href="../" class="logo">localweb.care</a>
+  </header>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="hero">
+      <p class="hero-eyebrow">About</p>
+      <h1>Where corporate direction comes home to Main Street.</h1>
+      <p class="hero-sub">Bringing the things that big companies take for granted a little closer to home.</p>
+    </section>
+
+    <div class="divider">
+      <hr />
+    </div>
+
+    <!-- Story -->
+    <section class="story">
+      <div>
+        <p class="story-label">The backstory</p>
+        <h2>Hi, I'm Jim.</h2>
+        <p>I have been in the corporate world as a software development manager and director of e-commerce, for longer
+          than I'd like to admit — the kind of roles where you wrangle vendors, lead technical teams, and help SMBs get
+          more out of their digital properties. </p>
+        <p>But somewhere along the way I started noticing a gap. The small businesses, family-owned shops, neighborhood
+          landscapers — the solo service providers — were getting left behind online. Too small for an agency and they
+          are tired of bugging their nephew who "does websites."</p>
+
+        <div class="story-note">These businesses deserved better.</div>
+
+        <p>So I started localweb.care to help small businesses who struggle to compete online. One person, with real
+          experience, helping local businesses level up their web presence.</p>
+        <p>If you've got a business and a website that isn't working hard enough for you, that's exactly the
+          conversation I want to have.</p>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services">
+      <div class="services-inner">
+        <p class="services-label">What I do</p>
+        <h2>All the digital things your business actually needs.</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="icon">🏠</div>
+            <h3>Site redesigns</h3>
+            <p>A website that looks like your business and actually converts visitors into customers. Built to last, not
+              to upsell.</p>
+          </div>
+          <div class="service-card">
+            <div class="icon">🔍</div>
+            <h3>SEO and Conversion Optimization</h3>
+            <p>Get found by the people already searching for what you do. Local SEO, on-page fixes, and the stuff that
+              actually moves the needle.</p>
+          </div>
+          <div class="service-card">
+            <div class="icon">📣</div>
+            <h3>Google Ads</h3>
+            <p>Smart campaigns that don't burn your budget. Set up right, monitored regularly, and explained in plain
+              English.</p>
+          </div>
+          <div class="service-card">
+            <div class="icon">🛒</div>
+            <h3>Online stores</h3>
+            <p>From product setup to checkout flow — an online store that works the way your customers expect it to.</p>
+          </div>
+          <div class="service-card">
+          <div class="icon">⚙️</div>
+            <h3>Ongoing maintenance</h3>
+            <p>Updates, backups, security monitoring, performance checks — the behind-the-scenes work that keeps your
+              site running smoothly.</p>
+          </div>
+          <div class="service-card">
+            <div class="icon">⚡</div>
+            <h3>Everything else</h3>
+            <p>Speed fixes, contact forms, email setup, analytics, social profiles — if it's digital and your business
+              needs it, let's talk.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <h2>Let's figure out what your business needs.</h2>
+      <p>No pressure, no pitch deck. Just a real conversation about where you're at and what would actually help.</p>
+      <a href="../contact/" class="btn btn-submit">Let's chat</a>
+    </section>
+
+  </main>
+
+</body>
+
+</html>

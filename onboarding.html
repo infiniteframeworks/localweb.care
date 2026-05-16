@@ -15,17 +15,36 @@
 <header>
 <a href="index.html" class="logo">localweb.care</a>
   <div class="progress-track">
-    <div class="progress-fill" id="progress-fill" style="width: 12.5%"></div>
+    <div class="progress-fill" id="progress-fill" style="width: 11.1%"></div>
   </div>
-  <span class="step-label" id="step-label">1 of 8</span>
+  <span class="step-label" id="step-label">1 of 9</span>
 </header>
 
 <!-- Slide viewport -->
 <div class="viewport" id="viewport">
   <div class="slides-track" id="slides-track">
 
-    <!-- Section 1: About Your Business -->
+    <!-- Intro / Welcome -->
     <div class="slide" data-section="0">
+      <div class="slide-inner">
+        <div class="section-eyebrow">Welcome</div>
+        <h1 class="section-title">Before we dive in</h1>
+        <div class="welcome-intro">
+          <p>This questionnaire is for business owners thinking about getting or revamping a website — whether you have a fully-formed vision or just the vague feeling that it's time for change. You don't need all the answers before you start.</p>
+          <p>It exists for two reasons: to get your creative juices flowing, and to cut down on back-and-forth during our first call. The more context I have upfront, the sooner we get to the fun part.</p>
+          <ul class="welcome-list">
+            <li><strong>Take your time.</strong> There's no deadline — come back to it whenever you're ready.</li>
+            <li><strong>Progress is saved automatically.</strong> Close the tab and pick up right where you left off.</li>
+            <li><strong>Leave any question blank.</strong> Partial answers and "I don't know" are genuinely fine — we'll fill in the gaps together.</li>
+            <li><strong>You <strong>will</strong> be graded.</strong> (j/k — but seriously, there are no wrong answers here.)</li>
+          </ul>
+          <p>Ready? Hit <strong>Next</strong> whenever you are.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 1: About Your Business -->
+    <div class="slide" data-section="1">
       <div class="slide-inner">
         <div class="section-eyebrow">Section 1 of 8</div>
         <h1 class="section-title">About Your Business</h1>
@@ -53,7 +72,7 @@
     </div>
 
     <!-- Section 2: The Real Problem -->
-    <div class="slide" data-section="1">
+    <div class="slide" data-section="2">
       <div class="slide-inner">
         <div class="section-eyebrow">Section 2 of 8</div>
         <h1 class="section-title">The Real Problem</h1>
@@ -81,7 +100,7 @@
     </div>
 
     <!-- Section 3: Customers and Goals -->
-    <div class="slide" data-section="2">
+    <div class="slide" data-section="3">
       <div class="slide-inner">
         <div class="section-eyebrow">Section 3 of 8</div>
         <h1 class="section-title">Customers &amp; Goals</h1>
@@ -105,7 +124,7 @@
     </div>
 
     <!-- Section 4: Content and Brand -->
-    <div class="slide" data-section="3">
+    <div class="slide" data-section="4">
       <div class="slide-inner">
         <div class="section-eyebrow">Section 4 of 8</div>
         <h1 class="section-title">Content &amp; Brand</h1>
@@ -133,7 +152,7 @@
     </div>
 
     <!-- Section 5: Functionality -->
-    <div class="slide" data-section="4">
+    <div class="slide" data-section="5">
       <div class="slide-inner">
         <div class="section-eyebrow">Section 5 of 8</div>
         <h1 class="section-title">Functionality</h1>
@@ -161,7 +180,7 @@
     </div>
 
     <!-- Section 6: Practical Stuff -->
-    <div class="slide" data-section="5">
+    <div class="slide" data-section="6">
       <div class="slide-inner">
         <div class="section-eyebrow">Section 6 of 8</div>
         <h1 class="section-title">Practical Stuff</h1>
@@ -189,7 +208,7 @@
     </div>
 
     <!-- Section 7: Decision Making -->
-    <div class="slide" data-section="6">
+    <div class="slide" data-section="7">
       <div class="slide-inner">
         <div class="section-eyebrow">Section 7 of 8</div>
         <h1 class="section-title">Decision Making</h1>
@@ -213,7 +232,7 @@
     </div>
 
     <!-- Section 8: Anything Else -->
-    <div class="slide" data-section="7">
+    <div class="slide" data-section="8">
       <div class="slide-inner">
         <div class="section-eyebrow">Section 8 of 8</div>
         <h1 class="section-title">Anything Else</h1>
@@ -265,6 +284,10 @@
 
 <script>
   const SECTIONS = [
+    {
+      title: "Welcome",
+      questions: []
+    },
     {
       title: "About Your Business",
       questions: [
@@ -411,7 +434,7 @@
     btnNext.disabled = true;
     btnNext.textContent = 'Sending…';
 
-    const sections = SECTIONS.map(section => ({
+    const sections = SECTIONS.filter(s => s.questions.length > 0).map(section => ({
       title: section.title,
       questions: section.questions.map(q => ({
         text: q.text,
@@ -443,7 +466,7 @@
   function buildModal() {
     const body = document.getElementById('modal-body');
     body.innerHTML = '';
-    SECTIONS.forEach(section => {
+    SECTIONS.filter(s => s.questions.length > 0).forEach(section => {
       const sec = document.createElement('div');
       sec.className = 'summary-section';
       sec.innerHTML = `<h4>${section.title}</h4>`;
@@ -482,7 +505,43 @@
     if (e.key === 'ArrowLeft')  navigate(-1);
   });
 
+  // ── localStorage persistence ──
+  const STORAGE_KEY = 'lwc_onboarding';
+
+  function saveState() {
+    const answers = {};
+    SECTIONS.forEach(s => s.questions.forEach(q => {
+      const el = document.getElementById(q.id);
+      if (el) answers[q.id] = el.value;
+    }));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ current, answers }));
+  }
+
+  function restoreState() {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    try {
+      const { current: saved, answers } = JSON.parse(raw);
+      Object.entries(answers).forEach(([id, val]) => {
+        const el = document.getElementById(id);
+        if (el) el.value = val;
+      });
+      current = (Number.isInteger(saved) && saved >= 0 && saved < total) ? saved : 0;
+    } catch { /* ignore corrupt data */ }
+  }
+
+  // Attach input listeners to every field
+  SECTIONS.forEach(s => s.questions.forEach(q => {
+    const el = document.getElementById(q.id);
+    if (el) el.addEventListener('input', saveState);
+  }));
+
+  // Save slide position on navigation
+  const _goTo = goTo;
+  goTo = function(index) { _goTo(index); saveState(); };
+
   // Initialize
+  restoreState();
   updateUI();
 </script>
 </body>
