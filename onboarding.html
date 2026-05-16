@@ -457,6 +457,7 @@
       return;
     }
 
+    localStorage.setItem(STORAGE_KEY + '_done', '1');
     track.style.display = 'none';
     navBar.style.display = 'none';
     confirm.classList.add('visible');
@@ -542,8 +543,17 @@
   goTo = function(index) { _goTo(index); saveState(); };
 
   // Initialize
-  restoreState();
-  updateUI();
+  if (localStorage.getItem(STORAGE_KEY + '_done')) {
+    restoreState();
+    track.style.display = 'none';
+    navBar.style.display = 'none';
+    confirm.classList.add('visible');
+    fill.style.width = '100%';
+    label.textContent = 'Complete';
+  } else {
+    restoreState();
+    updateUI();
+  }
 </script>
 </body>
 </html>
