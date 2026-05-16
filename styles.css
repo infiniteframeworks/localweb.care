@@ -27,7 +27,7 @@
   width: 300px;
   top: -70px;
   right: -50px;
-  opacity: 0.085;
+  opacity: 0.065;
   animation: seed-float 32s ease-in-out infinite;
 }
 
@@ -35,7 +35,7 @@
   width: 190px;
   bottom: 6%;
   left: -35px;
-  opacity: 0.065;
+  opacity: 0.05;
   animation: seed-float 42s ease-in-out infinite reverse 4s;
 }
 
@@ -43,7 +43,7 @@
   width: 130px;
   top: 42%;
   right: 4%;
-  opacity: 0.055;
+  opacity: 0.04;
   animation: seed-float 26s ease-in-out infinite 12s;
 }
 
@@ -320,10 +320,16 @@ input::placeholder {
   -webkit-backdrop-filter: blur(12px);
   border-top: 1px solid var(--chalk);
   padding: 16px 24px;
+  padding-bottom: max(16px, env(safe-area-inset-bottom, 0px));
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+}
+
+#btn-back,
+#btn-next {
+  flex-shrink: 0;
 }
 
 /* ── Buttons ── */
@@ -388,6 +394,10 @@ input::placeholder {
 .section-dots {
   display: flex;
   gap: 6px;
+  flex: 1;
+  justify-content: center;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .dot {
