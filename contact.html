@@ -171,6 +171,19 @@
       font-weight: 600;
     }
 
+    .field-error {
+      font-size: 13px;
+      color: var(--front-door);
+      font-family: var(--font-body);
+      min-height: 1em;
+    }
+
+    input.invalid,
+    textarea.invalid {
+      border-color: var(--front-door) !important;
+      box-shadow: 0 0 0 3px rgba(217, 89, 76, 0.15) !important;
+    }
+
     .divider {
       height: 1px;
       background: var(--chalk);
@@ -240,6 +253,7 @@
       <div class="field">
         <label for="name">Your name</label>
         <input type="text" id="name" name="name" placeholder="First name is fine" required />
+        <span class="field-error" id="name-error" role="alert"></span>
       </div>
       <div class="field">
         <label for="business">Business name <span class="optional">(optional)</span></label>
@@ -250,6 +264,7 @@
     <div class="field">
       <label for="email">Email address</label>
       <input type="email" id="email" name="email" placeholder="you@yourbusiness.com" required />
+      <span class="field-error" id="email-error" role="alert"></span>
     </div>
 
     <div class="field">
@@ -260,6 +275,7 @@
     <div class="field">
       <label for="message">What's going on with your website?</label>
       <textarea id="message" name="message" rows="5" placeholder="Doesn't have to be polished — just tell me what's bugging you or what you're hoping to do." required></textarea>
+      <span class="field-error" id="message-error" role="alert"></span>
     </div>
 
     <div class="form-footer">
@@ -289,16 +305,55 @@
 </main>
 
 <script>
-  document.getElementById('contact-form').addEventListener('submit', async function(e) {
+  const form = document.getElementById('contact-form');
+
+  function setError(inputId, errorId, message) {
+    document.getElementById(inputId).classList.add('invalid');
+    document.getElementById(errorId).textContent = message;
+  }
+
+  function clearError(inputId, errorId) {
+    document.getElementById(inputId).classList.remove('invalid');
+    document.getElementById(errorId).textContent = '';
+  }
+
+  ['name', 'email', 'message'].forEach(id => {
+    document.getElementById(id).addEventListener('input', () => clearError(id, id + '-error'));
+  });
+
+  form.addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    const name     = document.getElementById('name').value.trim();
-    const email    = document.getElementById('email').value.trim();
-    const business = document.getElementById('business').value.trim();
-    const phone    = document.getElementById('phone').value.trim();
-    const message  = document.getElementById('message').value.trim();
+    const nameVal     = document.getElementById('name').value.trim();
+    const emailVal    = document.getElementById('email').value.trim();
+    const businessVal = document.getElementById('business').value.trim();
+    const phoneVal    = document.getElementById('phone').value.trim();
+    const messageVal  = document.getElementById('message').value.trim();
 
-    if (!name || !email || !message) return;
+    let valid = true;
+
+    if (!nameVal) {
+      setError('name', 'name-error', 'Please enter your name.');
+      valid = false;
+    }
+
+    if (!emailVal) {
+      setError('email', 'email-error', 'Please enter your email address.');
+      valid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+      setError('email', 'email-error', 'Please enter a valid email address.');
+      valid = false;
+    }
+
+    if (!messageVal) {
+      setError('message', 'message-error', "Please tell me what's on your mind.");
+      valid = false;
+    }
+
+    if (!valid) {
+      form.querySelector('.invalid').focus();
+      return;
+    }
 
     const btn = this.querySelector('[type="submit"]');
     btn.disabled = true;
@@ -308,7 +363,7 @@
       const res = await fetch('/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, business, phone, message }),
+        body: JSON.stringify({ name: nameVal, email: emailVal, business: businessVal, phone: phoneVal, message: messageVal }),
       });
       if (!res.ok) throw new Error('server error');
     } catch {
