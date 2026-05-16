@@ -277,7 +277,8 @@ header {
 }
 
 textarea,
-input[type="text"] {
+input[type="text"],
+input[type="url"] {
   width: 100%;
   background: var(--paper);
   border: 1.5px solid var(--chalk);
@@ -296,7 +297,8 @@ input[type="text"] {
 textarea { min-height: 90px; }
 
 textarea:focus,
-input[type="text"]:focus {
+input[type="text"]:focus,
+input[type="url"]:focus {
   outline: none;
   border-color: var(--porch-light);
   box-shadow: 0 0 0 3px var(--porch-light-dim);
