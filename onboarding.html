@@ -36,13 +36,13 @@
         <div class="section-eyebrow">Welcome</div>
         <h1 class="section-title">Before we dive in</h1>
         <div class="welcome-intro">
-          <p>This questionnaire is for business owners thinking about getting or revamping a website — whether you have a fully-formed vision or just the vague feeling that it's time for change. <strong>It's long</strong> but you don't need all the answers before you start.</p>
+          <p>This questionnaire is for business owners thinking about getting or revamping a website, whether you have a fully-formed vision or just the vague feeling that it's time for change. <strong>It's long</strong> but you don't need all the answers before you start.</p>
           <p>It exists for two reasons: to get your creative juices flowing, and to cut down on back-and-forth during our first call. The more context I have upfront, the sooner we get to the fun part.</p>
           <ul class="welcome-list">
-            <li><strong>Take your time.</strong> There's no deadline — come back to it whenever you're ready.</li>
+            <li><strong>Take your time.</strong> There's no deadline. Come back to it whenever you're ready.</li>
             <li><strong>Progress is saved automatically.</strong> Close the tab and pick up right where you left off.</li>
-            <li><strong>Leave any question blank.</strong> Partial answers and "I don't know" are genuinely fine — we'll fill in the gaps together.</li>
-            <li><strong>You <strong>will</strong> be graded.</strong> (j/k — but seriously, there are no wrong answers here.)</li>
+            <li><strong>Leave any question blank.</strong> Partial answers and "I don't know" are genuinely fine. We'll fill in the gaps together.</li>
+            <li><strong>You <strong>will</strong> be graded.</strong> (j/k, but seriously, there are no wrong answers here.)</li>
           </ul>
           <p>Ready? Hit <strong>Next</strong> whenever you are.</p>
         </div>
@@ -155,11 +155,11 @@
           <textarea id="q17" placeholder="We have ready… We'll need help with…" rows="3"></textarea>
         </div>
         <div class="question">
-          <label><span class="q-number">20</span> Are there websites whose look and feel you admire — or actively dislike? Share a few and say why.</label>
+          <label><span class="q-number">20</span> Are there websites whose look and feel you admire, or actively dislike? Share a few and say why.</label>
           <textarea id="q18" placeholder="Love: [site] because… / Hate when sites…" rows="5"></textarea>
         </div>
         <div class="question">
-          <label><span class="q-number">21</span> Whose voice will the site speak in — formal, casual, expert, friendly?</label>
+          <label><span class="q-number">21</span> Whose voice will the site speak in: formal, casual, expert, friendly?</label>
           <textarea id="q20" placeholder="We want the tone to feel…" rows="2"></textarea>
         </div>
       </div>
@@ -180,7 +180,7 @@
         </div>
         <div class="question">
           <label><span class="q-number">24</span> Will anyone on your team update the site themselves? Who, and how comfortable are they with tech?</label>
-          <textarea id="q24" placeholder="[Name] would handle updates — they're comfortable with…" rows="3"></textarea>
+          <textarea id="q24" placeholder="[Name] would handle updates and they're comfortable with…" rows="3"></textarea>
         </div>
         <div class="question">
           <label><span class="q-number">25</span> Do you need it in multiple languages, or accessible to specific audiences?</label>
@@ -231,7 +231,7 @@
           <input type="text" id="q32" placeholder="Name and role" />
         </div>
         <div class="question">
-          <label><span class="q-number">33</span> What's your preferred way to communicate — email, calls, something else?</label>
+          <label><span class="q-number">33</span> What's your preferred way to communicate: email, calls, something else?</label>
           <input type="text" id="q34" placeholder="Email / Slack / Phone / etc." />
         </div>
       </div>
@@ -258,7 +258,7 @@
   <!-- Confirmation screen (hidden until submit) -->
   <div id="confirm-screen">
     <div class="check-icon">✓</div>
-    <h2>Thanks — that's everything.</h2>
+    <h2>Thanks. That's everything.</h2>
     <p>Your responses have been saved. I'll review them before our next conversation and come prepared with a clear plan.</p>
     <button class="summary-link" onclick="openModal()">View your full summary →</button>
   </div>
@@ -327,7 +327,7 @@
       questions: [
         { id: "q16", text: "Logo / brand colors / style guide?" },
         { id: "q17", text: "Content, photos, and videos ready?" },
-        { id: "q18", text: "Sites you admire or dislike — and why?" },
+        { id: "q18", text: "Sites you admire or dislike, and why?" },
         { id: "q20", text: "Tone of voice for the site?" },
       ]
     },
@@ -453,7 +453,7 @@
     } catch {
       btnNext.disabled = false;
       btnNext.textContent = 'Submit';
-      alert('Something went wrong — please try again.');
+      alert('Something went wrong. Please try again.');
       return;
     }
 
