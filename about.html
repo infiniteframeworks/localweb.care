@@ -6,13 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About Jim Smits | localweb.care</title>
   <meta name="description"
-    content="Jim Smits spent years as a software development manager and director of ecommerce. Now he helps small businesses level up their web presence." />
+    content="Jim has been a software development manager and director of ecommerce for many years. Now he helps small businesses level up their web presence, too." />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="canonical" href="https://localweb.care/about/" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://localweb.care/about/" />
   <meta property="og:title" content="About Jim Smits | localweb.care" />
   <meta property="og:description"
-    content="Jim Smits spent years as a software development manager and director of ecommerce. Now he helps small businesses level up their web presence." />
+    content="Jim has been a software development manager and director of ecommerce for many years. Now he helps small businesses level up their web presence, too." />
   <style>html{background:#FAF3E3}</style>
   <link rel="stylesheet" href="../styles.css" />
   <style>
@@ -233,6 +234,41 @@
       }
     }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://localweb.care/about/#jim",
+        "name": "Jim Smits",
+        "url": "https://localweb.care/about/",
+        "description": "Web designer and digital consultant helping small businesses compete online. History of software development management and e-commerce.",
+        "worksFor": { "@id": "https://localweb.care/#business" }
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://localweb.care/#business",
+        "name": "localweb.care",
+        "url": "https://localweb.care/",
+        "email": "hello@localweb.care",
+        "description": "Handcrafted websites for local businesses built by a real person, not an agency. Helping small businesses level up their web presence with the things that big companies take for granted.",
+        "founder": { "@id": "https://localweb.care/about/#jim" },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Web Services",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Site redesigns" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SEO and conversion optimization" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Google Ads management" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Online stores" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ongoing maintenance" } }
+          ]
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>

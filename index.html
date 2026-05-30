@@ -7,6 +7,7 @@
   <title>Local Website Design for Small Businesses | localweb.care</title>
   <meta name="description"
     content="Handcrafted websites for local businesses — built by a real person, not an agency. Honest pricing, thoughtful design, and someone who actually picks up the phone." />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="canonical" href="https://localweb.care/" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://localweb.care/" />
@@ -20,12 +21,35 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "localweb.care",
-    "description": "Handcrafted websites for local businesses",
-    "url": "https://localweb.care",
-    "email": "hello@localweb.care",
-    "serviceType": "Web Design"
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://localweb.care/#website",
+        "url": "https://localweb.care/",
+        "name": "localweb.care",
+        "publisher": { "@id": "https://localweb.care/#business" }
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://localweb.care/#business",
+        "name": "localweb.care",
+        "url": "https://localweb.care/",
+        "email": "hello@localweb.care",
+        "description": "Handcrafted websites for local businesses — built by a real person, not an agency. Honest pricing, thoughtful design, and someone who actually picks up the phone.",
+        "founder": { "@id": "https://localweb.care/about/#jim" },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Web Services",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Site redesigns" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SEO and conversion optimization" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Google Ads management" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Online stores" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ongoing maintenance" } }
+          ]
+        }
+      }
+    ]
   }
   </script>
   <style>html{background:#FAF3E3}</style>
